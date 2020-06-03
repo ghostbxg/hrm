@@ -1,0 +1,7 @@
+127.0.0.1 - - [25/May/2020:16:25:24 +0800] "GET / HTTP/1.1" 200 1915 http-bio-80-exec-1 42
+127.0.0.1 - - [25/May/2020:16:25:24 +0800] "GET /js/css/style.css HTTP/1.1" 404 983 http-bio-80-exec-3 3
+127.0.0.1 - - [25/May/2020:16:25:24 +0800] "GET /js/css/bootstrap.min.css HTTP/1.1" 404 999 http-bio-80-exec-2 8
+127.0.0.1 - - [25/May/2020:16:25:24 +0800] "GET /ys/logo/w.png HTTP/1.1" 200 3288 http-bio-80-exec-5 3
+127.0.0.1 - - [25/May/2020:16:25:52 +0800] "GET / HTTP/1.1" 200 1915 http-bio-80-exec-6 2
+127.0.0.1 - - [25/May/2020:16:25:52 +0800] "GET /ys/css/style.css HTTP/1.1" 200 7705 http-bio-80-exec-4 3
+127.0.0.1 - - [25/May/2020:16:25:52 +0800] "GET /ys/css/bootstrap.min.css HTTP/1.1" 200 118733 http-bio-80-exec-7 3

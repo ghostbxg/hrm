@@ -1,0 +1,31 @@
+{
+  "name" : "Job",
+  "comment" : null,
+  "fullColumn" : [ {
+    "name" : "jid",
+    "comment" : null,
+    "type" : null,
+    "shortType" : null,
+    "custom" : false,
+    "ext" : { }
+  }, {
+    "name" : "jname",
+    "comment" : null,
+    "type" : null,
+    "shortType" : null,
+    "custom" : false,
+    "ext" : { }
+  }, {
+    "name" : "jcontent",
+    "comment" : null,
+    "type" : null,
+    "shortType" : null,
+    "custom" : false,
+    "ext" : { }
+  } ],
+  "pkColumn" : null,
+  "otherColumn" : null,
+  "savePackageName" : "com",
+  "savePath" : "./src/main/java/com",
+  "saveModelName" : "hrm_project"
+}

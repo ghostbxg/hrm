@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.StaffDao">
+
+    <resultMap type="com.entity.Staff" id="StaffMap">
+        <result property="sid" column="sid" jdbcType="INTEGER"/>
+        <result property="sname" column="sname" jdbcType="VARCHAR"/>
+        <result property="sphonenumber" column="sphonenumber" jdbcType="VARCHAR"/>
+        <result property="sidnumber" column="sidnumber" jdbcType="VARCHAR"/>
+        <result property="seduction" column="seduction" jdbcType="VARCHAR"/>
+        <result property="semail" column="semail" jdbcType="VARCHAR"/>
+        <result property="sadress" column="sadress" jdbcType="VARCHAR"/>
+        <result property="ssex" column="ssex" jdbcType="VARCHAR"/>
+        <result property="stime" column="stime" jdbcType="VARCHAR"/>
+        <result property="pid" column="pid" jdbcType="INTEGER"/>
+        <result property="jid" column="jid" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="StaffMap">
+        select
+          sid, sname, sphonenumber, sidnumber, seduction, semail, sadress, ssex, stime, pid, jid
+        from people.staff
+        where sid = #{sid}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="StaffMap">
+        SELECT
+        a.sid, a.sname, a.sphonenumber, a.sidnumber, a.seduction, a.semail, a.sadress, a.ssex, a.stime, a.pid, a.jid,b.pname,c.jname
+        FROM people.staff a,people.department b,people.job c where a.pid=b.pid and a.jid=c.jid
+
+            <if test="sname != null and sname != ''">
+                and a.sname = '%#{sname}%'
+            </if>
+            <if test="sphonenumber != null and sphonenumber != ''">
+                and a.sphonenumber = '%#{sphonenumber}%'
+            </if>
+            <if test="sidnumber != null and sidnumber != ''">
+                and a.sidnumber = '%#{sidnumber}%'
+            </if>
+            <if test="ssex != null and ssex != ''">
+                and a.ssex = #{ssex}
+            </if>
+            <if test="pid != null">
+                and a.pid = #{pid}
+            </if>
+            <if test="jid != null">
+                and a.jid = #{jid}
+            </if>
+
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="StaffMap">
+        select
+          sid, sname, sphonenumber, sidnumber, seduction, semail, sadress, ssex, stime, pid, jid
+        from people.staff
+        <where>
+            <if test="sid != null">
+                and sid = #{sid}
+            </if>
+            <if test="sname != null and sname != ''">
+                and sname = #{sname}
+            </if>
+            <if test="sphonenumber != null and sphonenumber != ''">
+                and sphonenumber = #{sphonenumber}
+            </if>
+            <if test="sidnumber != null and sidnumber != ''">
+                and sidnumber = #{sidnumber}
+            </if>
+            <if test="seduction != null and seduction != ''">
+                and seduction = #{seduction}
+            </if>
+            <if test="semail != null and semail != ''">
+                and semail = #{semail}
+            </if>
+            <if test="sadress != null and sadress != ''">
+                and sadress = #{sadress}
+            </if>
+            <if test="ssex != null and ssex != ''">
+                and ssex = #{ssex}
+            </if>
+            <if test="stime != null and stime != ''">
+                and stime = #{stime}
+            </if>
+            <if test="pid != null">
+                and pid = #{pid}
+            </if>
+            <if test="jid != null">
+                and jid = #{jid}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="sid" useGeneratedKeys="true">
+        insert into people.staff(sname, sphonenumber, sidnumber, seduction, semail, sadress, ssex, stime, pid, jid)
+        values (#{sname}, #{sphonenumber}, #{sidnumber}, #{seduction}, #{semail}, #{sadress}, #{ssex}, #{stime}, #{pid}, #{jid})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update people.staff
+        <set>
+            <if test="sname != null and sname != ''">
+                sname = #{sname},
+            </if>
+            <if test="sphonenumber != null and sphonenumber != ''">
+                sphonenumber = #{sphonenumber},
+            </if>
+            <if test="sidnumber != null and sidnumber != ''">
+                sidnumber = #{sidnumber},
+            </if>
+            <if test="seduction != null and seduction != ''">
+                seduction = #{seduction},
+            </if>
+            <if test="semail != null and semail != ''">
+                semail = #{semail},
+            </if>
+            <if test="sadress != null and sadress != ''">
+                sadress = #{sadress},
+            </if>
+            <if test="ssex != null and ssex != ''">
+                ssex = #{ssex},
+            </if>
+            <if test="stime != null and stime != ''">
+                stime = #{stime},
+            </if>
+            <if test="pid != null">
+                pid = #{pid},
+            </if>
+            <if test="jid != null">
+                jid = #{jid},
+            </if>
+        </set>
+        where sid = #{sid}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from people.staff where sid = #{sid}
+    </delete>
+
+</mapper>

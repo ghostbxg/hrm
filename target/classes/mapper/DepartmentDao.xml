@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.DepartmentDao">
+
+    <resultMap type="com.entity.Department" id="DepartmentMap">
+        <result property="pid" column="pid" jdbcType="INTEGER"/>
+        <result property="pname" column="pname" jdbcType="VARCHAR"/>
+        <result property="pcontent" column="pcontent" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="DepartmentMap">
+        select
+          pid, pname, pcontent
+        from people.department
+        where pid = #{pid}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="DepartmentMap">
+        select
+          pid, pname, pcontent
+        from people.department
+        <where>
+            <if test="pname!=null">
+                and pname LIKE '%${pname}%'
+            </if>
+        </where>
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="DepartmentMap">
+        select
+          pid, pname, pcontent
+        from people.department
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="pid" useGeneratedKeys="true">
+        insert into people.department(pname, pcontent)
+        values (#{pname}, #{pcontent})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update people.department
+        <set>
+            <if test="pname != null and pname != ''">
+                pname = #{pname},
+            </if>
+            <if test="pcontent != null and pcontent != ''">
+                pcontent = #{pcontent},
+            </if>
+        </set>
+        where pid = #{pid}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from people.department where pid = #{pid}
+    </delete>
+
+</mapper>

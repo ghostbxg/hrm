@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.DoumentDao">
+
+    <resultMap type="com.entity.Doument" id="DoumentMap">
+        <result property="did" column="did" jdbcType="INTEGER"/>
+        <result property="dtime" column="dtime" jdbcType="VARCHAR"/>
+        <result property="dtitle" column="dtitle" jdbcType="VARCHAR"/>
+        <result property="dcontent" column="dcontent" jdbcType="VARCHAR"/>
+        <result property="uid" column="uid" jdbcType="INTEGER"/>
+        <result property="dcontentnr" column="dcontentnr" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="DoumentMap">
+        select
+          did, dtime, dtitle, dcontent, uid, dcontentnr
+        from people.doument
+        where did = #{did}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="DoumentMap">
+        SELECT
+        a.did, a.dtime, a.dtitle, a.dcontent, a.uid, a.dcontentnr,b.uname
+        FROM people.doument a,people.user1 b WHERE a.uid=b.uid
+            <if test="dtitle != null and dtitle != ''">
+                and a.dtitle like '%${dtitle}%'
+            </if>
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="DoumentMap">
+        select
+          did, dtime, dtitle, dcontent, uid, dcontentnr
+        from people.doument
+        <where>
+            <if test="did != null">
+                and did = #{did}
+            </if>
+            <if test="dtime != null and dtime != ''">
+                and dtime = #{dtime}
+            </if>
+            <if test="dtitle != null and dtitle != ''">
+                and dtitle = #{dtitle}
+            </if>
+            <if test="dcontent != null and dcontent != ''">
+                and dcontent = #{dcontent}
+            </if>
+            <if test="uid != null">
+                and uid = #{uid}
+            </if>
+            <if test="dcontentnr != null and dcontentnr != ''">
+                and dcontentnr = #{dcontentnr}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="did" useGeneratedKeys="true">
+        insert into people.doument(dtime, dtitle, dcontent, uid, dcontentnr)
+        values (#{dtime}, #{dtitle}, #{dcontent}, #{uid}, #{dcontentnr})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update people.doument
+        <set>
+            <if test="dtime != null and dtime != ''">
+                dtime = #{dtime},
+            </if>
+            <if test="dtitle != null and dtitle != ''">
+                dtitle = #{dtitle},
+            </if>
+            <if test="dcontent != null and dcontent != ''">
+                dcontent = #{dcontent},
+            </if>
+            <if test="uid != null">
+                uid = #{uid},
+            </if>
+            <if test="dcontentnr != null and dcontentnr != ''">
+                dcontentnr = #{dcontentnr},
+            </if>
+        </set>
+        where did = #{did}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from people.doument where did = #{did}
+    </delete>
+
+</mapper>
