@@ -54,12 +54,12 @@ public class DepartmentController {
 
     @RequestMapping("delete")
     @ResponseBody
-    public String delete(Integer[] id) throws Exception {
+    public boolean delete(Integer[] id) throws Exception {
 
         if(this.departmentService.deleteById(id)){
-            return "删除成功";
+            return true;
         }else{
-            return "删除失败";
+            return false;
         }
     }
 
@@ -98,6 +98,19 @@ public class DepartmentController {
         }
         model.addAttribute("deptlist",list);
         return "staffUpdate";
+
+    }
+
+    @GetMapping("allSelect")
+    public String allSelect(Model model){
+        List<Department> list=this.departmentService.queryAll();
+        if(list.size()==0){
+            model.addAttribute("flag1",true);
+        }else{
+            model.addAttribute("flag",false);
+        }
+        model.addAttribute("deptlist",list);
+        return "staffAll";
 
     }
 

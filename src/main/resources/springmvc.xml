@@ -23,7 +23,6 @@
     <!--统一异常-->
     <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
         <property name="defaultErrorView" value="error"></property>
-
        <property name="exceptionAttribute" value="ex"></property>
     </bean>
 

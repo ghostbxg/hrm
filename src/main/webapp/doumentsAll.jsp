@@ -123,7 +123,9 @@
                             type: "POST",
                             traditional: true,//这里设为true就可以了
                             success: function (r) {
-                                alert(r)
+                                if(r){
+                                    alert("删除成功")
+                                }
 
                             }
                         });

@@ -62,12 +62,12 @@ public class AnnouncementController {
 
     @RequestMapping("delete")
     @ResponseBody
-    public String delete(Integer[] id) throws Exception {
+    public boolean delete(Integer[] id) throws Exception {
         System.out.println(id);
         if(this.announcementService.deleteById(id)){
-            return "删除成功";
+            return true;
         }else{
-            return "删除失败";
+            return false;
         }
     }
 

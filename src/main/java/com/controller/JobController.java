@@ -63,6 +63,17 @@ public class JobController {
         return "forward:/department/insertSelect";
     }
 
+    @GetMapping("alltSelect")
+    public String allselect(Model model){
+        List<Job> list=this.jobService.queryAll();
+        if(list.size()==0){
+            model.addAttribute("flag",true);
+        }else{
+            model.addAttribute("flag",false);
+        }
+        model.addAttribute("joblist",list);
+        return "forward:/department/allSelect";
+    }
     @GetMapping("updateSelect")
     public String updateSelect(Model model){
         List<Job> list=this.jobService.queryAll();

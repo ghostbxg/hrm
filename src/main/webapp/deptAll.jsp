@@ -84,10 +84,18 @@
             admin=data;
             if(obj.event === 'del'){
                 layer.confirm('真的删除行么', function(index){
-                    obj.del();
                     layer.close(index);
                     $.post("/department/delete",{id:data.pid},function(r){
-                        alert(r)
+                        if(r==true||r==false){
+                            if(r){
+                                alert("删除成功")
+                            }
+                            obj.del();
+
+                        }else{
+                        alert('该职位绑定员工，请删除该部门的员工，再进行删除操作！')
+                    }
+
                     })
                 });
             } else if(obj.event === 'edit'){
@@ -127,7 +135,13 @@
                             type: "POST",
                             traditional: true,//这里设为true就可以了
                             success: function (r) {
-                                alert(r)
+                                if(r==true||r==false){
+                                    if(r){
+                                        alert("删除成功")
+                                    }
+                                }else{
+                                    alert('该部门绑定员工，请删除该部门的员工，再进行删除操作！')
+                                }
 
                             }
                         });

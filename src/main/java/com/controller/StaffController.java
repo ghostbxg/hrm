@@ -58,13 +58,9 @@ public class StaffController {
 
     @RequestMapping("delete")
     @ResponseBody
-    public String delete(Integer[] id) throws Exception {
-        System.out.println(id);
-        if(this.staffService.deleteById(id)){
-            return "删除成功";
-        }else{
-            return "删除失败";
-        }
+    public boolean delete(Integer[] id) throws Exception {
+        return this.staffService.deleteById(id);
+
     }
 
     @PostMapping("insert")

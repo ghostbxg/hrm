@@ -88,7 +88,9 @@ var admin;
                     obj.del();
                     layer.close(index);
                     $.post("/user1/delete",{id:data.uid},function(r){
-                        alert(r)
+                        if(r){
+                            alert("删除成功")
+                        }
                     })
                 });
             } else if(obj.event === 'edit'){
@@ -128,7 +130,9 @@ var admin;
                             type: "POST",
                             traditional: true,//这里设为true就可以了
                             success: function (r) {
-                                alert(r)
+                                if(r){
+                                    alert("删除成功")
+                                }
 
                             }
                         });

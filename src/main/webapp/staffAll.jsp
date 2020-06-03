@@ -12,17 +12,17 @@
     <title>Title</title>
 </head>
 
-<link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
-<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css"/>
-<script src="js/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
-<link href="css/bootstrap.min.css" rel="stylesheet">
-<script src="js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
-<link href="css/bootstrap/bootstrap-table.css" rel="stylesheet">
-<script src="js/bootstrap/bootstrap.min.js"></script>
-<script src="js/bootstrap/bootstrap-table.js"></script>
-<script src="js/bootstrap/bootstrap-table-zh-CN.js"></script>
-<link rel="stylesheet" href="layui/css/layui.css"  media="all">
-<script src="layui/layui.js" charset="utf-8"></script>
+<link rel="stylesheet" type="text/css" href="/css/bootstrap.css"/>
+<link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"/>
+<script src="/js/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
+<link href="/css/bootstrap.min.css" rel="stylesheet">
+<script src="/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+<link href="/css/bootstrap/bootstrap-table.css" rel="stylesheet">
+<script src="/js/bootstrap/bootstrap.min.js"></script>
+<script src="/js/bootstrap/bootstrap-table.js"></script>
+<script src="/js/bootstrap/bootstrap-table-zh-CN.js"></script>
+<link rel="stylesheet" href="/layui/css/layui.css"  media="all">
+<script src="/layui/layui.js" charset="utf-8"></script>
 <body>
 
 <div class="bg-info py-2 text-light">
@@ -30,13 +30,21 @@
 </div>
 
 <div class="py-3">
-
+    <c:if test="${empty flag}">
+        <c:if test="${empty joblist}">
+            <c:redirect url="/job/alltSelect"></c:redirect>
+        </c:if>
+    </c:if>
     <div class="demoTable">
         <div class="layui-inline" >
             <select name="jid" id="jid" class="form-control mr-sm-2">
                 <option value="" >---请选择要查询的职业---</option>
-                <option value="4">JAVA实习生</option>
-                <option value="5">JAVA开发实习生</option>
+                <c:if test="${flag}"><option value="">无职业</option></c:if>
+                <c:if test="${!flag}">
+                    <c:forEach items="${joblist}" var="c" >
+                        <option value="${c.jid}">${c.jname}</option>
+                    </c:forEach>
+                </c:if>
             </select>
         </div>
         <div class="layui-inline">
@@ -59,8 +67,12 @@
         <div class="layui-inline">
             <select name="pid" id="pid"class="form-control mr-sm-2">
             <option value="" >---请选择要查询的部门---</option>
-                <option value="5">技术部</option>
-                <option value="6">运营部</option>
+                <c:if test="${flag1}"><option value="">无部门</option></c:if>
+                <c:if test="${!flag1}">
+                    <c:forEach items="${deptlist}" var="c" >
+                        <option value="${c.pid}">${c.pname}</option>
+                    </c:forEach>
+                </c:if>
             </select>
         </div>
         <button class="layui-btn" data-type="reload">搜索</button>
@@ -125,7 +137,9 @@
                     obj.del();
                     layer.close(index);
                     $.post("/staff/delete",{id:data.sid},function(r){
-                        alert(r)
+                        if(r){
+                            alert("删除成功")
+                        }
                     })
                 });
             } else if(obj.event === 'edit'){
@@ -136,7 +150,7 @@
                     shade: false,
                     maxmin: true, //开启最大化最小化按钮
                     area: ['800px', '700'],
-                    content: 'staffUpdate.jsp'
+                    content: '/staffUpdate.jsp'
                 });
             }
         });
@@ -165,7 +179,9 @@
                             type: "POST",
                             traditional: true,//这里设为true就可以了
                             success: function (r) {
-                                alert(r)
+                                if(r){
+                                    alert("删除成功")
+                                }
 
                             }
                         });

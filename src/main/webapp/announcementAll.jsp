@@ -88,7 +88,9 @@
                     obj.del();
                     layer.close(index);
                     $.post("/announcement/delete",{id:data.aid},function(r){
-                        alert(r)
+                            if(r){
+                                alert("删除成功")
+                        }
                     })
                 });
             } else if(obj.event === 'edit'){
@@ -138,7 +140,9 @@
                             type: "POST",
                             traditional: true,//这里设为true就可以了
                             success: function (r) {
-                                alert(r)
+                                if(r){
+                                    alert("删除成功")
+                                }
 
                             }
                         });
