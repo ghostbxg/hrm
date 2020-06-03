@@ -4,6 +4,7 @@ import com.entity.Doument;
 import com.entity.User1;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.service.DoumentService;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,7 +22,7 @@ import java.util.*;
  * @author makejava
  * @since 2020-06-01 22:52:42
  */
-@RestController
+@Controller
 @RequestMapping("doument")
 public class DoumentController {
     /**

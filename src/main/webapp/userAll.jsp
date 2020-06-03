@@ -67,9 +67,8 @@ var admin;
             ,url:'/user1/selectAll'
             ,cols: [[
                 {type:'checkbox'}
-                ,{field:'uname', width:180, title: '登入名', sort: true}
-                ,{field:'upassword', width1:80, title: '密码'}
                 ,{field:'uname', width:180, title: '用户名', sort: true}
+                ,{field:'upassword', width1:80, title: '密码'}
                 ,{field:'usend', width:180, title: '状态'}
                 ,{field:'utime', title: '创建时间', minWidth: 100}
                 ,{fixed: 'right', width: 165, align:'center', toolbar: '#barDemo'}
