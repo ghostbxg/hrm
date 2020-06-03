@@ -44,6 +44,8 @@ var flag=false;
             if(!r){
                 alert("该用户名已存在！！");
                 flag=true;
+            }else{
+                flag=false;
             }
         })
         }
